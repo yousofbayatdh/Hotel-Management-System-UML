@@ -1,0 +1,113 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+package "I3.Classes" {
+
+class UserInfo {
+  - customer_id : int
+  - name : String
+  - email : String
+  - phone_no : String
+  - type : String
+}
+
+class Booking {
+  - booking_id : int
+  - room_id : int
+  - check_in : String
+  - check_out : String
+  - bookingType : String
+  - person : int
+}
+
+class RoomFare {
+  - room_type : String
+  - pricePerDay : int
+}
+
+class Room {
+  - room_id : int
+  - room_no : String
+  - floor : int
+  - hasTV : boolean
+  - hasAC : boolean
+  - hasWIFI : boolean
+  - hasPhone : boolean
+  - room_class : RoomFare
+}
+
+class Item {
+  - item_id : int
+  - item_name : String
+  - description : String
+  - price : int
+}
+
+class Food {
+  - food_id : int
+  - name : String
+  - price : int
+}
+
+class ExtraOrders {
+  - order_id : int
+  - customer_id : int
+  - item_id : int
+  - quantity : int
+  - item : Item
+}
+
+class Order
+
+class Payment {
+  - payment_date : String
+  - payment_method : String
+  - amount : float
+  - hasDiscount : boolean
+  - discount : float
+}
+
+}
+
+package "I3.DatabaseOperation" {
+class DataBaseConnection
+class DatabaseOperation
+class CustomerDb
+class BookingDb
+class RoomDb
+class FoodDb
+class ItemDb
+class OrderDb
+}
+
+package "I3.UI" {
+class ControlPanel
+class CustomerPanel
+class RoomPanel
+class FoodPanel
+class ItemPanel
+class OrderPanel
+class PaymentPanel
+}
+
+package "I3.TableModel" {
+class BookingTableModel
+class CustomCellRenderer
+}
+
+package "I3.Main" {
+class testing
+}
+
+Room --> RoomFare : room_class
+ExtraOrders --> Item : item
+
+BookingDb ..> Booking
+CustomerDb ..> UserInfo
+RoomDb ..> Room
+FoodDb ..> Food
+ItemDb ..> Item
+OrderDb ..> Order
+
+@enduml
